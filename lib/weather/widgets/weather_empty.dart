@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class WeatherEmpty extends StatelessWidget {
   const WeatherEmpty({super.key});
+  final SELECT_TEXT = 'Please Select a City!';
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +12,7 @@ class WeatherEmpty extends StatelessWidget {
       children: [
         const Text('🏙️', style: TextStyle(fontSize: 64)),
         Text(
-          'Please Select a City!',
+          SELECT_TEXT,
           style: theme.textTheme.headlineSmall,
         ),
       ],

@@ -3,9 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_weather/weather/cubit/weather_cubit.dart';
 import 'package:flutter_weather/weather/view/search_page.dart';
 import 'package:flutter_weather/weather/view/settings_page.dart';
-import 'package:flutter_weather/weather/widgets/weather_empty.dart';
-import 'package:flutter_weather/weather/widgets/weather_error.dart';
-import 'package:flutter_weather/weather/widgets/weather_loading.dart';
 import 'package:flutter_weather/weather/widgets/widgets.dart';
 
 class WeatherPage extends StatelessWidget {
@@ -23,7 +20,7 @@ class WeatherPage extends StatelessWidget {
       ]),
       body: Center(child: BlocBuilder<WeatherCubit, WeatherState>(
         builder: (context, state) {
-          print(state.status);
+          print('[weather_page.dart] state.status: ${state.status}');
           return switch (state.status) {
             WeatherStatus.initial => const WeatherEmpty(),
             WeatherStatus.loading => const WeatherLoading(),
@@ -43,6 +40,7 @@ class WeatherPage extends StatelessWidget {
             final city =
                 await Navigator.of(context).push<String>(SearchPage.route());
             if (!context.mounted) return;
+            print('[weather_page.dart] city: $city');
             await context.read<WeatherCubit>().fetchWeather(city);
           }),
     );
